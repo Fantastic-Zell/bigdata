@@ -1,29 +1,55 @@
 package com.class1926.bigdata.controller;
 
 import com.class1926.bigdata.entity.CityResult;
+import com.class1926.bigdata.entity.MapResult;
 import com.class1926.bigdata.entity.ProvinceResult;
+import com.class1926.bigdata.service.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class JobController {
 
+    @Autowired
+    private JobService jobService;
+
     @RequestMapping("city")
     public CityResult getInfoByCity(){
+        Object[][] citys = jobService.getCity();
 
-        //todo
-
-        return null;
+        CityResult cityResult = CityResult.builder().city(citys[0])
+                                                    .avgByCity(citys[1])
+                                                    .countByCity(citys[2])
+                                                    .experience(citys[3])
+                                                    .budget(citys[4]).build();
+        return cityResult;
 
     }
 
     @RequestMapping("province")
     public ProvinceResult getInfoByProvince(){
+        Object[][] provinces = jobService.getProvinc();
 
-        //todo
+        ProvinceResult provinceResult = ProvinceResult.builder().province(provinces[0])
+                                                                .avgByProvince(provinces[1])
+                                                                .countByProvince(provinces[2])
+                                                                .experience(provinces[3])
+                                                                .budget(provinces[4]).build();
+        return provinceResult;
 
-        return null;
     }
+
+    @RequestMapping("map")
+    public List<MapResult> getMapInfo(){
+
+        List mapResult = jobService.getMapInfo();
+
+        return mapResult;
+    }
+
 
 
 }

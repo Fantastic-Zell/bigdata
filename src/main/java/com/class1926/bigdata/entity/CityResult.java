@@ -1,18 +1,22 @@
 package com.class1926.bigdata.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class CityResult {
 
     //城市
-    private String[] city;
+    private Object[] city;
     //平均工资
-    private double[] avgByCity;
+    private Object[] avgByCity;
     //人数需求(总和)
-    private int[] countBycity;
+    private Object[] countByCity;
     //工作经验(平均值)
-    private int[] experience;
+    private Object[] experience;
     //总投入
-    private double[] budget;
-
+    private Object[] budget;
 
 }
 
