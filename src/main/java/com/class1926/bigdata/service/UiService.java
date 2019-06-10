@@ -56,4 +56,37 @@ public class UiService {
         }
         return mapResult;
     }
+
+    public List getAllJob(){
+
+        List<List> allJob = new ArrayList<>();
+        List<Object> city = new ArrayList<>();
+        List<Object> uisalary = new ArrayList<>();
+        List<Object> javasalary = new ArrayList<>();
+        List<Object> bigdatasalary = new ArrayList<>();
+        List<Object> cloudsalary = new ArrayList<>();
+        city.add("city");
+        uisalary.add("UI");
+        javasalary.add("JAVA");
+        bigdatasalary.add("大数据");
+        cloudsalary.add("云计算");
+        List<Object[]> avgs = jobRepository.findAvg();
+        for (int i = 0; i <avgs.size(); i++){
+            if ("北京".equals(avgs.get(i)[0]) || "上海".equals(avgs.get(i)[0]) || "广州".equals(avgs.get(i)[0]) || "深圳".equals(avgs.get(i)[0]) || "杭州".equals(avgs.get(i)[0]) || "南京".equals(avgs.get(i)[0]) || "成都".equals(avgs.get(i)[0]) || "苏州".equals(avgs.get(i)[0]) || "武汉".equals(avgs.get(i)[0]) || "合肥".equals(avgs.get(i)[0])){
+                city.add(avgs.get(i)[0]);
+                uisalary.add(avgs.get(i)[1]);
+                javasalary.add(avgs.get(i)[2]);
+                bigdatasalary.add(avgs.get(i)[3]);
+                cloudsalary.add(avgs.get(i)[4]);
+            }
+        }
+        allJob.add(city);
+        allJob.add(uisalary);
+        allJob.add(javasalary);
+        allJob.add(bigdatasalary);
+        allJob.add(cloudsalary);
+
+        return allJob;
+
+    }
 }
