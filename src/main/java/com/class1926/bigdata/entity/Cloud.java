@@ -12,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "job")
-public class Job {
+@Table(name = "job_cloud")
+public class Cloud {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
