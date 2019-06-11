@@ -43,12 +43,27 @@ public class JavaController {
 
     }
 
-    @RequestMapping("map")
-    public List<MapResult> getMapInfo() {
+    @RequestMapping("cityMap")
+    public List<MapResult> getMapByCity() {
 
-        List mapResult = jobService.getMapInfo();
+        List mapResult = jobService.getMapByCity();
 
         return mapResult;
+    }
+
+    @RequestMapping("provinceMap")
+    public List<MapResult> getMapByProvince() {
+
+        List mapResult = jobService.getMapByProvince();
+
+        return mapResult;
+    }
+
+    @RequestMapping("education")
+    public List<Object> getCountByEducation(){
+
+        List<Object> all = jobService.getCountByEducation();
+        return all;
     }
 
 

@@ -34,5 +34,9 @@ public interface UiRepository extends JpaRepository<Ui, Long> {
             "(select address,AVG(salary) as cloudsalary FROM job_cloud GROUP BY address)c " +
             "WHERE u.address=j.address and u.address=b.address and u.address=c.address", nativeQuery = true)
     List<Object[]> findAvg();
+
+    @Query(value = "SELECT education,count(hiring) FROM job_ui GROUP BY education",nativeQuery = true)
+    List<Object[]> findCountGroupByEducation();
+
 }
 

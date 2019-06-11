@@ -1,5 +1,6 @@
 package com.class1926.bigdata.service;
 
+import com.class1926.bigdata.entity.EducationResult;
 import com.class1926.bigdata.entity.MapResult;
 import com.class1926.bigdata.repository.BigdataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class BigdataService {
         return provinces;
     }
 
-    public List<MapResult> getMapInfo() {
+    public List<MapResult> getMapByCity() {
 
         List<MapResult> mapResult = new ArrayList<>();
         List<Object[]> groupByCity = jobRepository.findGroupByCity();
@@ -55,5 +56,34 @@ public class BigdataService {
             mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[2]).build());
         }
         return mapResult;
+    }
+    public List<MapResult> getMapByProvince() {
+
+        List<MapResult> mapResult = new ArrayList<>();
+        List<Object[]> groupByCity = jobRepository.findGroupByProvince();
+        for (int i = 0; i < groupByCity.size(); i++) {
+            mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[2]).build());
+        }
+        return mapResult;
+    }
+
+    public List<Object> getCountByEducation(){
+        ArrayList<Object> all = new ArrayList<>();
+        List<Object[]> count = jobRepository.findCountGroupByEducation();
+
+        double item = 0;
+        for (int i = 0; i < count.size(); i++) {
+            item = item + Double.valueOf(count.get(i)[1].toString());
+        }
+        for (int i = 1; i < count.size(); i++) {
+            ArrayList<Object> data = new ArrayList<>();
+            double x = Double.valueOf(count.get(i)[1].toString())/item*100;
+            EducationResult other = EducationResult.builder().name("other").value(100-(x)).itemStyle("labelBottom").build();
+            EducationResult result = EducationResult.builder().name(count.get(i)[0]).value(x).itemStyle("labelTop").build();
+            data.add(other);
+            data.add(result);
+            all.add(data);
+        }
+        return all;
     }
 }

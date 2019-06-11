@@ -2,7 +2,6 @@ package com.class1926.bigdata.controller;
 
 import com.class1926.bigdata.entity.CityResult;
 import com.class1926.bigdata.entity.MapResult;
-import com.class1926.bigdata.entity.ProvinceResult;
 import com.class1926.bigdata.service.CloudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,25 +29,27 @@ public class CloudController {
 
     }
 
-    @RequestMapping("province")
-    public ProvinceResult getInfoByProvince() {
-        Object[][] provinces = jobService.getProvinc();
+    @RequestMapping("cityMap")
+    public List<MapResult> getMapByCity() {
 
-        ProvinceResult provinceResult = ProvinceResult.builder().province(provinces[0])
-                .avgByProvince(provinces[1])
-                .countByProvince(provinces[2])
-                .experience(provinces[3])
-                .budget(provinces[4]).build();
-        return provinceResult;
-
-    }
-
-    @RequestMapping("map")
-    public List<MapResult> getMapInfo() {
-
-        List mapResult = jobService.getMapInfo();
+        List mapResult = jobService.getMapByCity();
 
         return mapResult;
+    }
+
+    @RequestMapping("provinceMap")
+    public List<MapResult> getMapByProvince() {
+
+        List mapResult = jobService.getMapByProvince();
+
+        return mapResult;
+    }
+
+    @RequestMapping("education")
+    public List<Object> getCountByEducation(){
+
+        List<Object> all = jobService.getCountByEducation();
+        return all;
     }
 
 

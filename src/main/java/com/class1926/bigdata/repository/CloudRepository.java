@@ -26,5 +26,8 @@ public interface CloudRepository extends JpaRepository<Cloud, Long> {
      */
     @Query(value = "select province,AVG(salary) as avgByProvince,SUM(hiring) as countByProvince,AVG(experience) as experience,SUM(salary) as budget FROM job_cloud group by province", nativeQuery = true)
     List<Object[]> findGroupByProvince();
+
+    @Query(value = "SELECT education,count(hiring) FROM job_cloud GROUP BY education",nativeQuery = true)
+    List<Object[]> findCountGroupByEducation();
 }
 
