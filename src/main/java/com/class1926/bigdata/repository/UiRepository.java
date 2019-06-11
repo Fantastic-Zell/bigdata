@@ -35,6 +35,11 @@ public interface UiRepository extends JpaRepository<Ui, Long> {
             "WHERE u.address=j.address and u.address=b.address and u.address=c.address", nativeQuery = true)
     List<Object[]> findAvg();
 
+    /**
+     * 查询不同学历所需的人数
+     *
+     * @return
+     */
     @Query(value = "SELECT education,count(hiring) FROM job_ui GROUP BY education",nativeQuery = true)
     List<Object[]> findCountGroupByEducation();
 

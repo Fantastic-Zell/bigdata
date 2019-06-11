@@ -1,6 +1,5 @@
 package com.class1926.bigdata.service;
 
-import com.class1926.bigdata.entity.EducationResult;
 import com.class1926.bigdata.entity.MapResult;
 import com.class1926.bigdata.repository.JavaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +56,52 @@ public class JavaService {
         }
         return mapResult;
     }
+
+    public List<MapResult> getAvgSalaryByCity() {
+
+        List<MapResult> mapResult = new ArrayList<>();
+        List<Object[]> groupByCity = jobRepository.findGroupByCity();
+        for (int i = 0; i < groupByCity.size(); i++) {
+            mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[1]).build());
+        }
+        return mapResult;
+    }
+
+    public List<MapResult> getAvgExperienceByCity() {
+
+        List<MapResult> mapResult = new ArrayList<>();
+        List<Object[]> groupByCity = jobRepository.findGroupByCity();
+        for (int i = 0; i < groupByCity.size(); i++) {
+            mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[3]).build());
+        }
+        return mapResult;
+    }
+
     public List<MapResult> getMapByProvince() {
 
         List<MapResult> mapResult = new ArrayList<>();
         List<Object[]> groupByCity = jobRepository.findGroupByProvince();
         for (int i = 0; i < groupByCity.size(); i++) {
             mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[2]).build());
+        }
+        return mapResult;
+    }
+    public List<MapResult> getAvgSalaryByProvince() {
+
+        List<MapResult> mapResult = new ArrayList<>();
+        List<Object[]> groupByCity = jobRepository.findGroupByProvince();
+        for (int i = 0; i < groupByCity.size(); i++) {
+            mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[1]).build());
+        }
+        return mapResult;
+    }
+
+    public List<MapResult> getAvgExperienceByProvince() {
+
+        List<MapResult> mapResult = new ArrayList<>();
+        List<Object[]> groupByCity = jobRepository.findGroupByProvince();
+        for (int i = 0; i < groupByCity.size(); i++) {
+            mapResult.add(MapResult.builder().name(groupByCity.get(i)[0]).value(groupByCity.get(i)[3]).build());
         }
         return mapResult;
     }
@@ -78,8 +117,8 @@ public class JavaService {
         for (int i = 1; i < count.size(); i++) {
             ArrayList<Object> data = new ArrayList<>();
             double x = Double.valueOf(count.get(i)[1].toString())/item*100;
-            EducationResult other = EducationResult.builder().name("other").value(100-(x)).itemStyle("labelBottom").build();
-            EducationResult result = EducationResult.builder().name(count.get(i)[0]).value(x).itemStyle("labelTop").build();
+            MapResult other = MapResult.builder().name("other").value(100-(x)).build();
+            MapResult result = MapResult.builder().name(count.get(i)[0]).value(x).build();
             data.add(other);
             data.add(result);
             all.add(data);

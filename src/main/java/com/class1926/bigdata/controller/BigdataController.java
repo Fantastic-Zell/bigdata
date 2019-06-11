@@ -50,11 +50,40 @@ public class BigdataController {
 
         return mapResult;
     }
+    @RequestMapping("cityAvgSalaryMap")
+    public List<MapResult> getAvgSalaryByCity() {
 
+        List mapResult = jobService.getAvgSalaryByCity();
+
+        return mapResult;
+    }
+
+    @RequestMapping("cityAvgExperienceMap")
+    public List<MapResult> getAvgExperienceByCity() {
+
+        List mapResult = jobService.getAvgExperienceByCity();
+
+        return mapResult;
+    }
     @RequestMapping("provinceMap")
     public List<MapResult> getMapByProvince() {
 
         List mapResult = jobService.getMapByProvince();
+
+        return mapResult;
+    }
+    @RequestMapping("provinceAvgSalaryMap")
+    public List<MapResult> getAvgSalaryByProvince() {
+
+        List mapResult = jobService.getAvgSalaryByProvince();
+
+        return mapResult;
+    }
+
+    @RequestMapping("provinceAvgExperienceMap")
+    public List<MapResult> getAvgExperienceByProvince() {
+
+        List mapResult = jobService.getAvgExperienceByProvince();
 
         return mapResult;
     }

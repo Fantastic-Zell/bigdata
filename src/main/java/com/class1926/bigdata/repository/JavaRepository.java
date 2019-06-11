@@ -27,6 +27,11 @@ public interface JavaRepository extends JpaRepository<Java, Long> {
     @Query(value = "select province,AVG(salary) as avgByProvince,SUM(hiring) as countByProvince,AVG(experience) as experience,SUM(salary) as budget FROM job_java group by province", nativeQuery = true)
     List<Object[]> findGroupByProvince();
 
+    /**
+     * 查询不同学历所需的人数
+     *
+     * @return
+     */
     @Query(value = "SELECT education,count(hiring) FROM job_java GROUP BY education",nativeQuery = true)
     List<Object[]> findCountGroupByEducation();
 }
